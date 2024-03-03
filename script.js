@@ -40,7 +40,7 @@ const updateCharacters = () => {
       const deleteButton = document.createElement("button");
       deleteButton.classList.add("delete-button");
       deleteButton.textContent = "Delete";
-      deleteButton.addEventListener("click", () => {git 
+      deleteButton.addEventListener("click", () => {
         deleteCharacter(character.id, character.name);
       });
 
@@ -107,6 +107,7 @@ async function deleteCharacter(characterId, characterName) {
       );
       modal.style.display = "none";
     }, 1000);
+    updateCharacters();
   } catch (error) {
     console.log(`Error fetching data from API: ${error}`);
   }
