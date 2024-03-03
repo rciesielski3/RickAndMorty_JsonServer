@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Rick and Morty</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <h1>RICK AND MORTY CHARACTERS</h1>
+      <div class="header">
+        <img
+          src="/react/homeWorkApi/RickAndMorty_JsonServer/rickAndMortyServer.png"
+          alt="headerRickAndMorty"
+        />
+      </div>
+      <div id="filterContainer">
+        <div id="filterSection">
+          <div id="filterTitle">Filter by name:</div>
+          <div class="filter">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Search by name..."
+            />
+          </div>
+        </div>
+        <div id="filterSection">
+          <div id="filterTitle">Filter by state:</div>
+          <div class="filter">
+            <input
+              type="radio"
+              id="alive"
+              name="status"
+              value="Alive"
+              checked
+            />
+            <label for="alive">Alive</label>
+            <input type="radio" id="dead" name="status" value="Dead" />
+            <label for="dead">Dead</label>
+            <input type="radio" id="unknown" name="status" value="unknown" />
+            <label for="unknown">Unknown</label>
+          </div>
+        </div>
+      </div>
+      <div class="character-container"></div>
+      <div class="no-results-message">
+        <p><b>No characters found matching your search criteria.</b></p>
+      </div>
+      <div id="navButton">
+        <button id="btnPrev">Prev</button>
+        <span id="countCharacter"></span>
+        <button id="btnNext">Next</button>
+      </div>
+    </div>
+    <h2>Add new character</h2>
+    <form id="characterForm">
+      <label for="name">Name:</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        placeholder="Character name"
+      /><br />
+
+      <label for="status">Status:</label>
+      <select id="status" name="status" required>
+        <option value="Alive">Alive</option>
+        <option value="Dead">Dead</option>
+        <option value="unknown">Unknown</option></select
+      ><br />
+
+      <label for="species">Species:</label>
+      <select id="species" name="species" required>
+        <option value="Alien">Alien</option>
+        <option value="Human">Human</option>
+      </select>
+      <br />
+
+      <input type="submit" value="Add character" />
+    </form>
+    <br />
+    <div id="modalBox" class="modal">
+      <div class="modal-content">
+        <p id="modalText"></p>
+      </div>
+    </div>
+    <div id="footer">
+      <div>Copyright © 2024</div>
+      <div>Created by Rafal Ciesielski</div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>

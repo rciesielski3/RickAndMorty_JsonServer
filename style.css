@@ -1,0 +1,151 @@
+:root {
+  --white: #fff;
+  --gray-100: #ccc;
+  --gray-200: #ddd;
+  --gray-300: lightslategrey;
+  --red: #ffcccc;
+  --black: #000000;
+  --blue: steelblue;
+  --font: Chalkduster, fantasy;
+}
+
+body {
+  text-align: center;
+  background-color: var(--gray-200);
+  font-family: var(--font);
+}
+
+.header img {
+  height: 300px;
+}
+
+.character-container {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, 200px);
+  gap: 20px;
+  margin-top: 20px;
+  padding-bottom: 20px;
+}
+
+h1,
+#footer,
+.character-tile,
+#characterForm {
+  border: 1px solid var(--black);
+  border-radius: 5px;
+  padding: 10px;
+  background-color: var(--gray-100);
+}
+
+.character-photo {
+  width: 100%;
+  border-radius: 5px 5px 0 0;
+}
+
+.no-results-message {
+  background-color: var(--red);
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#filterContainer {
+  display: inline-flex;
+  margin-top: 20px;
+  background-color: var(--gray-300);
+  border-radius: 5px;
+  padding-top: 5px;
+}
+
+#filterSection {
+  margin-left: 30px;
+}
+
+.filter {
+  margin: 10px;
+}
+
+.filter input[type="text"] {
+  border: 1px solid var(--gray-100);
+  padding: 8px 10px;
+  background-color: var(--white);
+  border-radius: 5px;
+  margin: 0 5px;
+  font-family: var(--font);
+}
+
+.filter input[type="radio"] {
+  display: none;
+}
+
+.filter input[type="radio"] + label {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0 5px;
+}
+
+.filter input[type="radio"]:checked + label {
+  background-color: var(--gray-100);
+}
+
+input[type="submit"],
+button {
+  display: inline-block;
+  padding: 5px 10px;
+  background-color: var(--white);
+  border: 1px solid var(--gray-100);
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 10px 5px;
+  font-family: var(--font);
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+.delete-button:hover {
+  background-color: var(--red);
+}
+
+input[type="submit"]:hover,
+.filter input[type="radio"] + label:hover,
+button:hover {
+  background-color: var(--blue);
+}
+
+div#navButton {
+  display: inline-flex;
+  background-color: var(--gray-300);
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.modal-content {
+  background-color: var(--red);
+  padding: 10px;
+  border-radius: 5px;
+}
