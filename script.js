@@ -7,9 +7,8 @@ const searchInput = document.getElementById("search-input");
 const prevButton = document.getElementById("btnPrev");
 const nextButton = document.getElementById("btnNext");
 
-var modal = document.getElementById("modalBox");
-var modalText = document.getElementById("modalText");
-
+let modal = document.getElementById("modalBox");
+let modalText = document.getElementById("modalText");
 let currentPage = 0;
 const pageSize = 5;
 
@@ -54,8 +53,6 @@ const updateCharacters = () => {
 
   const totalCharacters = dataResults.length;
   const totalPages = Math.ceil(totalCharacters / pageSize);
-  console.log("totalPages ", totalPages);
-  console.log("currentPage ", currentPage);
 
   if (currentPage === 0) {
     prevButton.disabled = true;
@@ -73,7 +70,7 @@ const updateCharacters = () => {
 filterRadios.forEach((radio) => {
   radio.addEventListener("change", () => {
     currentPage = 0;
-    currentStatus = radio.value; // Update current status
+    currentStatus = radio.value;
     fetchDataAndDisplayCharacters();
   });
 });
@@ -85,12 +82,12 @@ searchInput.addEventListener("input", () => {
 
 nextButton.addEventListener("click", () => {
   currentPage++;
-  updateCharacters();
+  fetchDataAndDisplayCharacters();
 });
 
 prevButton.addEventListener("click", () => {
   currentPage--;
-  updateCharacters();
+  fetchDataAndDisplayCharacters();
 });
 
 function showModal(text) {
@@ -110,7 +107,6 @@ async function deleteCharacter(characterId, characterName) {
       );
       modal.style.display = "none";
     }, 1000);
-    // updateCharacters();
   } catch (error) {
     console.log(`Error fetching data from API: ${error}`);
   }
@@ -136,7 +132,6 @@ characterForm.addEventListener("submit", async function (event) {
       body: JSON.stringify(characterData),
     });
     fetchDataAndDisplayCharacters();
-    console.log("characterData.status ", characterData.status);
   } catch (error) {
     alert("Error adding new character. Please try again.");
   }
@@ -154,7 +149,6 @@ async function fetchDataAndDisplayCharacters() {
     if (search) params.set("name_like", search);
 
     apiUrl += "?" + params.toString();
-    console.log("apiUrl ", apiUrl);
 
     const response = await fetch(apiUrl);
     dataResults = await response.json();
