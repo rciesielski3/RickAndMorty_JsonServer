@@ -100,7 +100,7 @@ async function deleteCharacter(characterId, characterName) {
     showModal(`Deleted character ${characterName}...`);
     setTimeout(function () {
       const response = fetch(
-        "http://localhost:3000/characters/" + characterId,
+        `http://localhost:3000/characters/${characterId}`,
         {
           method: "DELETE",
         }
