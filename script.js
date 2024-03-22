@@ -102,13 +102,16 @@ function showModal(text) {
 async function deleteCharacter(characterId, characterName) {
   try {
     showModal(`Deleted character ${characterName}...`);
-    const response = fetch(`http://localhost:3000/characters/${characterId}`, {
-      method: "DELETE",
-    });
-    updateCharacters();
     setTimeout(() => {
+      const response = fetch(
+        `http://localhost:3000/characters/${characterId}`,
+        {
+          method: "DELETE",
+        }
+      );
       modal.style.display = "none";
     }, 2000);
+    updateCharacters();
   } catch (error) {
     console.log(`Error fetching data from API: ${error}`);
   }
