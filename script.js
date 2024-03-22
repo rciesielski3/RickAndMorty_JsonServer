@@ -12,10 +12,14 @@ let modalText = document.getElementById("modalText");
 let currentPage = 0;
 const pageSize = 5;
 
-const updateCharacters = () => {
+const updateCharacters = (newCharacter) => {
   const startIndex = currentPage * pageSize;
   const endIndex = startIndex + pageSize;
   const charactersToShow = dataResults.slice(startIndex, endIndex);
+
+  if (newCharacter) {
+    dataResults.push(newCharacter);
+  }
 
   characterContainer.innerHTML = "";
 
@@ -98,16 +102,13 @@ function showModal(text) {
 async function deleteCharacter(characterId, characterName) {
   try {
     showModal(`Deleted character ${characterName}...`);
-    setTimeout(function () {
-      const response = fetch(
-        `http://localhost:3000/characters/${characterId}`,
-        {
-          method: "DELETE",
-        }
-      );
-      modal.style.display = "none";
-    }, 1000);
+    const response = fetch(`http://localhost:3000/characters/${characterId}`, {
+      method: "DELETE",
+    });
     updateCharacters();
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 2000);
   } catch (error) {
     console.log(`Error fetching data from API: ${error}`);
   }
@@ -115,14 +116,24 @@ async function deleteCharacter(characterId, characterName) {
 
 characterForm.addEventListener("submit", async function (event) {
   event.preventDefault();
-  const formData = new FormData(this);
-  const characterData = {};
-  formData.forEach((value, key) => {
-    characterData[key] = value;
-  });
+  const name = document.getElementById("name").value;
+  const status = document.getElementById("status").value;
+  const species = document.getElementById("species").value;
 
-  characterData.image =
-    "https://rickandmortyapi.com/api/character/avatar/3.jpeg";
+  if (!name || !status || !species) {
+    showModal("Please fill in all required fields.");
+    setTimeout(() => {
+      modal.style.display = "none";
+    }, 2000);
+    return;
+  }
+
+  const characterData = {
+    name,
+    status,
+    species,
+    image: "https://rickandmortyapi.com/api/character/avatar/3.jpeg",
+  };
 
   try {
     const response = await fetch("http://localhost:3000/characters", {
@@ -132,7 +143,11 @@ characterForm.addEventListener("submit", async function (event) {
       },
       body: JSON.stringify(characterData),
     });
-    fetchDataAndDisplayCharacters();
+
+    const newCharacter = await response.json();
+    updateCharacters(newCharacter);
+
+    characterForm.reset();
   } catch (error) {
     alert("Error adding new character. Please try again.");
   }
